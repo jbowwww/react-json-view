@@ -21,7 +21,16 @@ const config = {
     hot: true,
     inline: true,
     historyApiFallback: true,
-    contentBase: PATHS.build
+    contentBase: PATHS.build,
+    before: function(app, server, compiler) {
+      app.get('/data', function(req, res) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With, content-type, Authorization");
+        res.json(require(PATHS.devServer + '/src/default-data.json'));
+        res.end();
+      });
+    }
   },
   output: {
     path: PATHS.build,

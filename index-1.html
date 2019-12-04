@@ -1,0 +1,115 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unknown </title></head><body>
+<p><img alt="alt text" src="https://github.com/mac-s-g/react-json-view/blob/master/doc/rjv-icon-alt.png?raw=true" /></p>
+<p><a href="https://www.npmjs.com/package/react-json-view"><img alt="npm" src="https://img.shields.io/npm/v/react-json-view.svg" /></a> <a href="https://github.com/mac-s-g/react-json-view/blob/master/LISCENSE"><img alt="npm" src="https://img.shields.io/npm/l/react-json-view.svg" /></a> <a href="https://travis-ci.org/mac-s-g/react-json-view"><img alt="Build Status" src="https://travis-ci.org/mac-s-g/react-json-view.svg" /></a> <a href="https://coveralls.io/github/mac-s-g/react-json-view?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/mac-s-g/react-json-view/badge.svg?branch=master" /></a></p>
+<h1 id="react-json-view">react-json-view</h1>
+<p>RJV is a React component for displaying and editing javascript <strong>arrays</strong> and <strong>JSON objects</strong>.</p>
+<p>This component provides a responsive interface for displaying arrays or JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with <em>any web-based javascript application</em>.</p>
+<p><a href="https://mac-s-g.github.io/react-json-view/demo/dist/">Check out the Interactive Demo</a></p>
+<h3 id="implementation-example">Implementation Example</h3>
+<p>```js
+// import the react-json-view component
+import ReactJson from 'react-json-view'</p>
+<p>// use the component in your app!
+<ReactJson src={my_json_object} />
+```</p>
+<h3 id="output-examples">Output Examples</h3>
+<h4 id="default-theme">Default Theme</h4>
+<p><img alt="alt text" src="https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-15.png?raw=true" title="Output Example 1" /></p>
+<h4 id="hopscotch-theme-with-triangle-icons">Hopscotch Theme, with Triangle Icons:</h4>
+<p><img alt="alt text" src="https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-14.png?raw=true" title="Output Example 2" /></p>
+<h3 id="installation-instructions">Installation Instructions</h3>
+<p>Install this component with <a href="https://www.npmjs.com/package/react-json-view">NPM</a>.
+<code>shell
+npm install --save react-json-view</code>
+Or add to your package.json config file:
+<code>json
+"dependencies": {
+    "react-json-view": "latest"
+}</code></p>
+<h3 id="props">Props</h3>
+<p>Name|Type|Default|Description
+|:---|:---|:---|:---
+<code>src</code>|<code>JSON Object</code>|None|This property contains your input JSON
+<code>name</code>|<code>string</code> or <code>false</code>|"root"|Contains the name of your root node.  Use <code>null</code> or <code>false</code> for no name.
+<code>theme</code>|<code>string</code>|"rjv-default"|RJV supports base-16 themes.  Check out the list of supported themes <a href="https://mac-s-g.github.io/react-json-view/demo/dist/">in the demo</a>. A custom "rjv-default" theme applies by default.
+<code>style</code>|<code>object</code>|<code>{}</code>|Style attributes for react-json-view container.  Explicit style attributes will override attributes provided by a theme.
+<code>iconStyle</code>|<code>string</code>|"circle"| Style of expand/collapse icons.  Accepted values are "circle", triangle" or "square".
+<code>indentWidth</code>|<code>integer</code>|4|Set the indent-width for nested objects
+<code>collapsed</code>|<code>boolean</code> or <code>integer</code>|<code>false</code>|When set to <code>true</code>, all nodes will be collapsed by default.  Use an integer value to collapse at a particular depth.
+<code>collapseStringsAfterLength</code>|<code>integer</code>|<code>false</code>|When an integer value is assigned, strings will be cut off at that length. Collapsed strings are followed by an ellipsis. String content can be expanded and collapsed by clicking on the string value.
+<code>shouldCollapse</code>|<code>(field)=&gt;{}</code>|<code>false</code>|Callback function to provide control over what objects and arrays should be collapsed by default.  An object is passed to the callback containing <code>name</code>, <code>src</code>, <code>type</code> ("array" or "object") and <code>namespace</code>.
+<code>groupArraysAfterLength</code>|<code>integer</code>|<code>100</code>|When an integer value is assigned, arrays will be displayed in groups by count of the value. Groups are displayed with brakcet notation and can be expanded and collapsed by clickong on the brackets.
+<code>enableClipboard</code>|<code>boolean</code> or <code>(copy)=&gt;{}</code>|<code>true</code>|When prop is not <code>false</code>, the user can copy objects and arrays to clipboard by clicking on the clipboard icon.  Copy callbacks are supported.
+<code>displayObjectSize</code>|<code>boolean</code>|<code>true</code>|When set to <code>true</code>, objects and arrays are labeled with size
+<code>displayDataTypes</code>|<code>boolean</code>|<code>true</code>|When set to <code>true</code>, data type labels prefix values
+<code>onEdit</code>|<code>(edit)=&gt;{}</code>|<code>false</code>|When a callback function is passed in, <code>edit</code> functionality is enabled.  The callback is invoked before edits are completed. Returning <code>false</code> from <code>onEdit</code> will prevent the change from being made. <a href="#onedit-onadd-and-ondelete-interaction">see: onEdit docs</a>
+<code>onAdd</code>|<code>(add)=&gt;{}</code>|<code>false</code>|When a callback function is passed in, <code>add</code> functionality is enabled.  The callback is invoked before additions are completed. Returning <code>false</code> from <code>onAdd</code> will prevent the change from being made. <a href="#onedit-onadd-and-ondelete-interaction">see: onAdd docs</a>
+<code>defaultValue</code>|<code>string \|number \|boolean \|array \|object</code>|<code>null</code>|Sets the default value to be used when adding an item to json
+<code>onDelete</code>|<code>(delete)=&gt;{}</code>|<code>false</code>|When a callback function is passed in, <code>delete</code> functionality is enabled.  The callback is invoked before deletions are completed. Returning <code>false</code> from <code>onDelete</code> will prevent the change from being made. <a href="#onedit-onadd-and-ondelete-interaction">see: onDelete docs</a>
+<code>onSelect</code>|<code>(select)=&gt;{}</code>|<code>false</code>|When a function is passed in, clicking a value triggers the <code>onSelect</code> method to be called.
+<code>sortKeys</code>|<code>boolean</code>|<code>false</code>|set to true to sort object keys
+<code>validationMessage</code>|<code>string</code>|"Validation Error"|Custom message for validation failures to <code>onEdit</code>, <code>onAdd</code>, or <code>onDelete</code> callbacks</p>
+<h3 id="features">Features</h3>
+<ul>
+<li><code>onEdit</code>, <code>onAdd</code> and <code>onDelete</code> props allow users to edit the <code>src</code> variable</li>
+<li>Object, array, string and function values can be collapsed and expanded</li>
+<li>Object and array nodes display length</li>
+<li>Object and array nodes support a "Copy to Clipboard" feature</li>
+<li>String values can be truncated after a specified length</li>
+<li>Arrays can be subgrouped after a specified length</li>
+<li>Base-16 Theme Support</li>
+<li>When <code>onEdit</code> is enabled:</li>
+<li><code>Ctrl/Cmd+Click</code> Edit Mode</li>
+<li><code>Ctrl/Cmd+Enter</code> Submit</li>
+</ul>
+<h3 id="customizing-style">Customizing Style</h3>
+<h4 id="stock-themes">Stock Themes</h4>
+<p>RJV now supports base-16 themes!</p>
+<p>You can specify a <code>theme</code> name or object when you instantiate your rjv component.
+<code>jsx
+&lt;ReactJson src={my_important_json} theme="monokai" /&gt;</code>
+Check out the list of supported themes <a href="https://mac-s-g.github.io/react-json-view/demo/dist/">in the component demo</a>.</p>
+<h4 id="monokai-theme-example">Monokai theme example</h4>
+<p><img alt="alt text" src="https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-monokai-2.png?raw=true" title="Base-16 Theme Example" /></p>
+<h4 id="solarized-theme-example">Solarized theme example</h4>
+<p><img alt="alt text" src="https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-solarized-2.png?raw=true" title="Base-16 Theme Example" /></p>
+<h4 id="use-your-own-theme">Use Your Own Theme</h4>
+<p>You can supply your own base-16 theme object.</p>
+<p>To better understand custom themes, take a look at <a href="https://github.com/mac-s-g/react-json-view/blob/7c154b9a7d83ea89dce2c171ebdf4d163ff49233/dev-server/src/index.js#L135">my example implementation</a> and the <a href="https://github.com/chriskempson/base16/blob/master/styling.md">base-16 theme styling guidelines</a>.</p>
+<h3 id="onedit-onadd-and-ondelete-interaction">onEdit, onAdd and onDelete Interaction</h3>
+<p>Pass callback methods to <code>onEdit</code>, <code>onAdd</code> and <code>onDelete</code> props.  Your method will be invoked when a user attempts to update your <code>src</code> object.</p>
+<p>The following object will be passed to your method:
+<code>js
+{
+    updated_src: src, //new src value
+    name: name, //new var name
+    namespace: namespace, //list, namespace indicating var location
+    new_value: new_value, //new variable value
+    existing_value: existing_value, //existing variable value
+}</code></p>
+<p>Returning <code>false</code> from a callback method will prevent the src from being affected.</p>
+<h3 id="contributing-to-the-source-code">Contributing to the source code</h3>
+<h4 id="run-the-dev-server">Run the Dev Server</h4>
+<p>```bash</p>
+<h1 id="clone-this-repository">clone this repository</h1>
+<p>git clone git@github.com:mac-s-g/react-json-view.git &amp;&amp; cd react-json-view</p>
+<h1 id="install-dependencies">install dependencies</h1>
+<p>npm install --save-dev</p>
+<h1 id="run-the-dev-server-with-hot-reloading">run the dev server with hot reloading</h1>
+<p>npm run dev
+<code>``
+Webpack Dev Server should automatically open up http://localhost:2000 in your web browser.  If it does not, open a browser and navigate to port 2000. The hot reloader will automatically reload when files are modified in the</code>/src/` directory.</p>
+<h4 id="run-the-production-build">Run the Production Build</h4>
+<p>```bash</p>
+<h1 id="run-the-build-note-you-may-need-to-use-sudo-priveledges-to-run-the-build-successfully">run the build (note: you may need to use <code>sudo</code> priveledges to run the build successfully)</h1>
+<p>npm run build
+```
+Please add tests for your code before posting a pull request.</p>
+<p>You can run the test suite with <code>npm run test</code> or <code>npm run test:watch</code> to automatically reload when files are modified.</p>
+<h4 id="docker-tools">Docker Tools</h4>
+<p>I recommend using docker for development because it enforces environmental consistency.</p>
+<p>For information about contributing with Docker, see the <a href="https://github.com/mac-s-g/react-json-view/blob/master/docker/README.md#contributing-to-this-project-using-docker">README in ./docker</a>.</p>
+<h3 id="inspiration">Inspiration</h3>
+<p>I drew a ton of design ideas from <a href="https://github.com/alexkuz/react-json-tree">react-json-tree</a>.  Thanks to the RJT contributors for putting together an awesome component!</p>
+<p>I'm also inspired by users who come up with interesting feature requests.  Reach out to me with ideas for this project or other projects you want to collaborate on.  My email address is listed on my <a href="https://github.com/mac-s-g">github user page</a>.</p>
+</body></html>

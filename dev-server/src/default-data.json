@@ -1,0 +1,13 @@
+{
+	"test": "data",
+	"obj": {
+		"prop": "is a property",
+		"numberProp": 1
+	},
+	"obj2": {
+		"someProp": null
+	},
+	"arr": [
+		0, 1, 2
+	]
+}
