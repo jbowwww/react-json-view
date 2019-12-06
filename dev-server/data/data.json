@@ -1,0 +1,18 @@
+{
+	"test": "data",
+	"obj": {
+		"prop": "is a property",
+		"numberProp": 1,
+		"objName": "name-1",
+		"number3": 3,
+		"bools": true
+	},
+	"obj2": {
+		"someProp": null,
+		"someProp2": 1,
+		"someProp3": true
+	},
+	"arr": [
+		0, 1, 2
+	]
+}

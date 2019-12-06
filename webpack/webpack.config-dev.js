@@ -1,13 +1,7 @@
 const path = require("path")
 const webpack = require("webpack")
 
-const PATHS = {
-  src: path.join(__dirname, "..", "src"),
-  js: path.join(__dirname, "..", "src", "js"),
-  style: path.join(__dirname, "..", "src", "style"),
-  build: path.join(__dirname, "..", "dev-server", "dist"),
-  devServer: path.join(__dirname, "..", "dev-server")
-}
+const PATHS = require("../src/js/paths.js");
 
 const config = {
   entry: [PATHS.devServer + "/src/index.js"],
@@ -22,15 +16,7 @@ const config = {
     inline: true,
     historyApiFallback: true,
     contentBase: PATHS.build,
-    before: function(app, server, compiler) {
-      app.get('/data', function(req, res) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With, content-type, Authorization");
-        res.json(require(PATHS.devServer + '/src/default-data.json'));
-        res.end();
-      });
-    }
+    before: require(PATHS.js + '/routes')
   },
   output: {
     path: PATHS.build,
