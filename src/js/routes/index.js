@@ -1,5 +1,6 @@
 
 const fs = require("fs");
+const debug = require('debug')('routes/index.js');
 const { inspect } = require('util');
 
 const PATHS = require('../paths.js');
@@ -7,7 +8,11 @@ const PATHS = require('../paths.js');
 module.exports = router;
 
 function router(app, server, compiler) {
-  console.log(`router: app=${inspect(app)}\nrouter: server=${inspect(server)}\nrouter: compiler=${inspect(compiler)}`);
+  debug(`router init`);//: app=${inspect(app)}\nrouter: server=${inspect(server)}\nrouter: compiler=${inspect(compiler)}`);
+  app.use(function (req, res, next) {
+    debug(`router`);//: req=${inspect(req)}`);
+    next();
+  });
   app.get('/data', function(req, res) {
     res.set("Access-Control-Allow-Origin", "*");
     res.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
